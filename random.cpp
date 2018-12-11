@@ -13,7 +13,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 void Random::PrintErrorAndExit(std::string error_message)
 {
-	//std::cout << error_message;
+	std::cout << error_message;
 	exit(-1);
 }
 
@@ -49,30 +49,30 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 	unsigned char random_buffer[key_length];
 
 
-	int file_handler = open("/dev/urandom", O_RDWR);
+	int file_handler_open = open("/dev/urandom", O_RDWR);
 
-	if(file_handler < 0)
+	if(file_handler_open < 0)
 	{
-		std::string error_message =  "ERROR: Failed to open file handler errorCode="+ std::string(strerror(errno));
+		std::string error_message =  "ERROR: Failed file handler open errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
 
-	int read_handler = read(file_handler, random_buffer, key_length);
+	int file_handler_read = read(file_handler_open, random_buffer, key_length);
 
-	if(read_handler < 0)
+	if(file_handler_read < 0)
 	{
-		close(file_handler);
-		std::string error_message =  "ERROR: Failed to read file handler errorCode="+ std::string(strerror(errno));
+		close(file_handler_open);
+		std::string error_message =  "ERROR: Failed file handler read errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
 
-	int close_handler = close(file_handler);
+	int file_handler_close = close(file_handler_open);
 
-	if(close_handler < 0)
+	if(file_handler_close < 0)
 	{
-		std::string error_message =  "WARNING: Failed to close file handler errorCode="+ std::string(strerror(errno));
+		std::string error_message =  "WARNING: Failed file handler close errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
