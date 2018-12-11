@@ -29,9 +29,9 @@ void Random::PrintVector (std::vector<int> input_list)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////// Print Vector Ascii /////////////////////////////////////////
+///////////////////////////////////// Print Vector As Ascii //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
-void Random::PrintVectorAscii (std::vector<int> input_list)
+void Random::PrintVectorAsAscii (std::vector<int> input_list)
 {
 	for (std::vector<int>::iterator it = input_list.begin(); it != input_list.end(); ++it)
 	{
@@ -84,9 +84,6 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 		int number = random_buffer[i];
 		output_list.push_back(number);
 	}
-
-	//possible mods free up random_buffer
-	//return output_list as pointer
 
 	return output_list;
 
@@ -253,8 +250,8 @@ void Random::GetRandomKey(int key_lenght)
 	//Random::PrintVector(number_list_replace);
 	//std::cout << std::endl;
 
-	//Print Vector as Ascii
-	Random::PrintVectorAscii(number_list_replace);
+	//Print Vector As Ascii
+	Random::PrintVectorAsAscii(number_list_replace);
 
 
 }
