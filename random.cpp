@@ -101,7 +101,7 @@ int Random::ConvertRandomNumber(int min, int max, int random_number)
 	int calc = min + random_number % ((max + 1) - min);
 
 	//Second Algorithm
-	//return min + int( ((max+1-min) * random_number) / (sizeof(random_number)<<8) );
+	//int calc = min + int( ((max+1-min) * random_number) / (sizeof(random_number)<<8) );
 
 	return calc;
 }
@@ -115,6 +115,9 @@ std::vector<int> Random::ConvertRandomNumberList(std::vector<int> input_list)
 
 	std::vector <int> character_list;
 
+	//////////////////////////////////////////////////////////////////////////////
+	//CHARACTER LIST//////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
 	character_list.push_back('A');
 	character_list.push_back('B');
 	character_list.push_back('C');
@@ -160,7 +163,6 @@ std::vector<int> Random::ConvertRandomNumberList(std::vector<int> input_list)
 	//character_list.push_back('<'); --removed
 
 
-
 	int character_list_size  = character_list.size();
 	int character_list_size_minus = character_list_size -1;
 	int input_list_size = input_list.size();
@@ -187,6 +189,10 @@ std::vector<int> Random::ReplaceFirstCharacter(std::vector<int> input_list)
 
 	std::vector <int> character_list;
 
+
+	//////////////////////////////////////////////////////////////////////////////
+	//CHARACTER LIST//////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////
 	character_list.push_back('A');
 	character_list.push_back('B');
 	character_list.push_back('C');
@@ -211,6 +217,7 @@ std::vector<int> Random::ReplaceFirstCharacter(std::vector<int> input_list)
 	character_list.push_back('X');
 	character_list.push_back('Y');
 	character_list.push_back('Z');
+
 
 	int character_list_size  = character_list.size();
 	int character_list_size_minus = character_list_size -1;
