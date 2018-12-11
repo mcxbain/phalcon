@@ -20,9 +20,9 @@ void Random::PrintErrorAndExit(std::string error_message)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //Print Vector//////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
-void Random::PrintVector (std::vector<int> input_vector)
+void Random::PrintVector (std::vector<int> input_list)
 {
-	for (std::vector<int>::iterator it = input_vector.begin(); it != input_vector.end(); ++it)
+	for (std::vector<int>::iterator it = input_list.begin(); it != input_list.end(); ++it)
 	{
 		std::cout << ' ' << *it;
 	}
@@ -31,9 +31,9 @@ void Random::PrintVector (std::vector<int> input_vector)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //Print Vector Ascii////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
-void Random::PrintVectorAscii (std::vector<int> input_vector)
+void Random::PrintVectorAscii (std::vector<int> input_list)
 {
-	for (std::vector<int>::iterator it = input_vector.begin(); it != input_vector.end(); ++it)
+	for (std::vector<int>::iterator it = input_list.begin(); it != input_list.end(); ++it)
 	{
 		char character = static_cast<char>(*it);
 		std::cout << character;
@@ -49,26 +49,26 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 	unsigned char random_buffer[key_length];
 
 
-	int file_handler_open = open("/dev/urandom", O_RDWR);
+	int file_handler = open("/dev/urandom", O_RDWR);
 
-	if(file_handler_open < 0)
+	if(file_handler < 0)
 	{
 		std::string error_message =  "ERROR: Failed file handler open errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
 
-	int file_handler_read = read(file_handler_open, random_buffer, key_length);
+	int file_handler_read = read(file_handler, random_buffer, key_length);
 
 	if(file_handler_read < 0)
 	{
-		close(file_handler_open);
+		close(file_handler);
 		std::string error_message =  "ERROR: Failed file handler read errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
 
-	int file_handler_close = close(file_handler_open);
+	int file_handler_close = close(file_handler);
 
 	if(file_handler_close < 0)
 	{
@@ -77,18 +77,18 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 	}
 
 
-	std::vector<int> output_vector;
+	std::vector<int> output_list;
 
 	for (int i=0; i < key_length; i++)
 	{
 		int number = random_buffer[i];
-		output_vector.push_back(number);
+		output_list.push_back(number);
 	}
 
 	//possible mods free up random_buffer
-	//return output_vector as pointer
+	//return output_list as pointer
 
-	return output_vector;
+	return output_list;
 
 }
 
@@ -114,6 +114,7 @@ std::vector<int> Random::ConvertRandomNumberList(std::vector<int> input_list)
 {
 
 	std::vector <int> character_list;
+
 	character_list.push_back('A');
 	character_list.push_back('B');
 	character_list.push_back('C');
@@ -162,10 +163,9 @@ std::vector<int> Random::ConvertRandomNumberList(std::vector<int> input_list)
 
 	int character_list_size  = character_list.size();
 	int character_list_size_minus = character_list_size -1;
-
-	std::vector<int> output_list;
 	int input_list_size = input_list.size();
 
+	std::vector<int> output_list;
 
 	for (int i = 0; i < input_list_size; ++i)
 	{
@@ -182,10 +182,11 @@ std::vector<int> Random::ConvertRandomNumberList(std::vector<int> input_list)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //Replace First Character///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
-std::vector<int> Random::ReplaceFirstCharacter(std::vector<int> number_list)
+std::vector<int> Random::ReplaceFirstCharacter(std::vector<int> input_list)
 {
 
 	std::vector <int> character_list;
+
 	character_list.push_back('A');
 	character_list.push_back('B');
 	character_list.push_back('C');
@@ -211,14 +212,15 @@ std::vector<int> Random::ReplaceFirstCharacter(std::vector<int> number_list)
 	character_list.push_back('Y');
 	character_list.push_back('Z');
 
-	int list_size  = character_list.size();
-	int list_size_minus  = list_size -1;
-	int random_number = Random::ConvertRandomNumber(0, list_size_minus, number_list[0]);
+	int character_list_size  = character_list.size();
+	int character_list_size_minus = character_list_size -1;
+
+	int random_number = Random::ConvertRandomNumber(0, character_list_size_minus, input_list[0]);
 	int character_number = character_list[random_number];
 
-	number_list[0] = character_number;
+	input_list[0] = character_number;
 
-	return number_list;
+	return input_list;
 
 }
 
