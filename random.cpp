@@ -53,7 +53,7 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 
 	if(file_handler < 0)
 	{
-		std::string error_message =  "ERROR: Failed file handler open errorCode="+ std::string(strerror(errno));
+		std::string error_message =  "ERROR: File handler open errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
@@ -63,7 +63,7 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 	if(file_handler_read < 0)
 	{
 		close(file_handler);
-		std::string error_message =  "ERROR: Failed file handler read errorCode="+ std::string(strerror(errno));
+		std::string error_message =  "ERROR: File handler read errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
@@ -72,7 +72,7 @@ std::vector<int> Random::GetRandomNumberList(int key_length)
 
 	if(file_handler_close < 0)
 	{
-		std::string error_message =  "WARNING: Failed file handler close errorCode="+ std::string(strerror(errno));
+		std::string error_message =  "WARNING: File handler close errorCode="+ std::string(strerror(errno));
 		Random::PrintErrorAndExit(error_message);
 	}
 
